@@ -5,6 +5,10 @@
   gather_facts: true
   tasks:
 
+  - name: load variables
+    include_vars:
+      file: vars_files/{{ ansible_distribution }}{{ansible_distribution_major_version }}.yml
+
   - name: get host id from satellite
     uri:
       url: "{{ sat_url }}/api/v2/hosts?search={{ inventory_hostname }}"
@@ -76,8 +80,8 @@
     yum:
       name: "*"
       state: latest
-      disablerepo: "{{ patch_repos[ansible_distribution_major_version].disable }}"
-      enablerepo: "{{ patch_repos[ansible_distribution_major_version].enable }}"
+      disablerepo: "{{ disablerepo }}"
+      enablerepo: "{{ enablerepo }}"
     register: patched
     when: yum_updates.rc == 100
 
