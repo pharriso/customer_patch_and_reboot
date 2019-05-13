@@ -57,7 +57,7 @@
     delegate_to: localhost
 
   - name: check for available updates
-    command: yum check-update
+    command: yum check-update --disablerepo {{ disablerepo }} --enablerepo {{ enablerepo }}
     args:
       warn: false
     register: yum_updates
