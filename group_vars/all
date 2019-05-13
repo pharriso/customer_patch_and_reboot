@@ -1,0 +1,6 @@
+patch_repos:
+  7:
+    disable: "*"
+    enable: 
+    - rhel-7-server-rpms
+

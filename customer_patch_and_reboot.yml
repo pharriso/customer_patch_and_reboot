@@ -76,6 +76,8 @@
     yum:
       name: "*"
       state: latest
+      disablerepo: "{{ patch_repos[ansible_distribution_major_version].disable }}"
+      enablerepo: "{{ patch_repos[ansible_distribution_major_version].enable }}"
     register: patched
     when: yum_updates.rc == 100
 
