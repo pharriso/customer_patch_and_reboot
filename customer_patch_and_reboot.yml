@@ -54,8 +54,8 @@
 
   - name: check for available updates
     command: yum check-update
-      args:
-        warn: false
+    args:
+      warn: false
     register: yum_updates
     failed_when: yum_updates.rc == 1
     changed_when: false
