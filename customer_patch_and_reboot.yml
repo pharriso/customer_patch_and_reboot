@@ -59,8 +59,9 @@
   - name: check for available updates
     yum: 
       list: updates
-      enablerepo: "{{ enablerepo }}"
       disablerepo: "{{ disablerepo }}"
+      enablerepo: "{{ enablerepo }}"
+      exclude: "{{ exclude }}"
     register: yum_updates
     changed_when: false
 
@@ -72,16 +73,13 @@
     reboot:
     when: yum_updates.results | length > 0
 
-  - name: run script
-    script: script.sh
-    when: yum_updates.results | length > 0
-
   - name: yum update
     yum:
       name: "*"
       state: latest
       disablerepo: "{{ disablerepo }}"
       enablerepo: "{{ enablerepo }}"
+      exclude: "{{ exclude }}"
     register: patched
     when: yum_updates.results | length > 0
 

@@ -2,4 +2,5 @@ disablerepo:
   - "*"
 enablerepo: 
   - rhel-7-server-rpms
+exclude: puppet,facter
 
